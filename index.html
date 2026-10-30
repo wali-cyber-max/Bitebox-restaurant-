@@ -251,5 +251,76 @@ footer {
 <footer>
     <p>© 2026 BiteBox Restaurant Demo. Sample website for demonstration.</p>
 </footer>
+<section id="order-form">
+  <h2 class="section-title">Place Your Order 🍔</h2>
+  <p class="section-subtitle">Choose your food and send your order on WhatsApp.</p>
+  <div class="contact-box">
+    <form onsubmit="sendOrder(event)">
+      <label for="customer">Your Name</label>
+      <input id="customer" type="text" placeholder="Enter your name" required>
+      <label for="food">Choose Food</label>
+      <select id="food" required>
+        <option value="">Select an item</option>
+        <option value="Classic Beef Burger">Classic Beef Burger - Rs. 650</option>
+        <option value="Loaded Pizza">Loaded Pizza - Rs. 1200</option>
+        <option value="Crispy Chicken">Crispy Chicken - Rs. 550</option>
+        <option value="Chicken Shawarma">Chicken Shawarma - Rs. 400</option>
+      </select>
+      <label for="quantity">Quantity</label>
+      <input id="quantity" type="number" min="1" max="20" value="1" required>
+      <label for="notes">Extra Instructions (optional)</label>
+      <textarea id="notes" placeholder="Any special request?"></textarea>
+      <button class="button" type="submit">Send Order on WhatsApp</button>
+    </form>
+  </div>
+</section>
+<style>
+#order-form label {
+  display: block;
+  text-align: left;
+  margin: 14px 0 6px;
+  color: #ff9f1c;
+}
+#order-form input,
+#order-form select,
+#order-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #111;
+  color: white;
+  font-size: 16px;
+}
+#order-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+#order-form button {
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+</style>
+<script>
+function sendOrder(event) {
+  event.preventDefault();
+  const name = document.getElementById("customer").value.trim();
+  const food = document.getElementById("food").value;
+  const quantity = document.getElementById("quantity").value;
+  const notes = document.getElementById("notes").value.trim();
+  const message =
+    "Hi BiteBox! I would like to place an order.\n" +
+    "Name: " + name + "\n" +
+    "Food: " + food + "\n" +
+    "Quantity: " + quantity + "\n" +
+    "Instructions: " + (notes || "None");
+  const phone = "923001234567";
+  const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+  window.open(url, "_blank");
+}
+</script>
 </body>
 </html>
